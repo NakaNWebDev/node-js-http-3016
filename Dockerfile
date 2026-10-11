@@ -12,3 +12,12 @@ ENV LANG=ja_JP.UTF-8
 ENV TZ=Asia/Tokyo
 
 WORKDIR /app
+
+# 依存関係のインストールとコードのコピーを追加
+COPY package.json yarn.lock ./
+RUN yarn install
+
+COPY . .
+
+# アプリケーションの起動命令を追加
+CMD ["node", "index.js"]
